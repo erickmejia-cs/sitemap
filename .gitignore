@@ -89,3 +89,6 @@ Thumbs.db
 .pnp.*
 
 
+
+# npm auth (contains registry tokens - never commit)
+.npmrc
