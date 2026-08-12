@@ -1,0 +1,7 @@
+fileignoreconfig:
+# npm writes 625 sha512- integrity hashes into the lockfile; these trip the
+# base64-entropy detector but carry no secrets. Refresh this checksum whenever
+# the lockfile changes legitimately.
+- filename: package-lock.json
+  checksum: 81149678a2f606fcbdcb715be9e4653388a1f1131acf815b46c53675367d0c8b
+version: "1.0"

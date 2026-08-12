@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useAppSdk } from "../../common/hooks/useAppSdk";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExternalLink, faEdit, faChevronRight, faChevronDown, faChevronUp, faFolder, faFile } from "@fortawesome/pro-solid-svg-icons";
+import { ChevronDown, ChevronRight, ChevronUp, ExternalLink, File, Folder, SquarePen } from "lucide-react";
 import "../index.css";
 import "./StackDashboard.css";
 
@@ -738,17 +737,15 @@ const SiteMapDashboard = () => {
           >
             <div className={`flex items-center justify-center w-5 shrink-0 ${hasChildren ? 'h-5' : 'h-4'}`}>
               {hasChildren && (
-                <FontAwesomeIcon
-                  icon={isExpanded ? faChevronDown : faChevronRight}
-                  className="w-3 h-3 text-gray-500 block"
-                />
+                isExpanded
+                  ? <ChevronDown className="w-3 h-3 text-gray-500 block" />
+                  : <ChevronRight className="w-3 h-3 text-gray-500 block" />
               )}
             </div>
             <div className={`flex items-center justify-center mr-2 shrink-0 ${hasChildren ? 'w-5 h-5' : 'w-4 h-4'}`}>
-              <FontAwesomeIcon
-                icon={hasChildren ? faFolder : faFile}
-                className={`block ${hasChildren ? 'text-blue-500 text-xl' : 'text-gray-400 text-base'}`}
-              />
+              {hasChildren
+                ? <Folder fill="currentColor" className="block text-blue-500 w-5 h-5" />
+                : <File fill="currentColor" className="block text-gray-400 w-4 h-4" />}
             </div>
             <span className={`flex-1 flex items-center text-sm leading-5 h-5 ${hasChildren ? 'font-semibold' : 'font-medium'}`}>
               {isRoot ? '/' : node.name}
@@ -773,10 +770,7 @@ const SiteMapDashboard = () => {
               >
                 <div className="flex items-center justify-center w-5 shrink-0 h-5" />
                 <div className="flex items-center justify-center mr-2 shrink-0 w-5 h-5">
-                  <FontAwesomeIcon
-                    icon={faFile}
-                    className="text-gray-400 block text-xl"
-                  />
+                  <File fill="currentColor" className="text-gray-400 block w-5 h-5" />
                 </div>
                 <div className="flex items-center flex-1 min-w-0">
                   <span className="font-medium whitespace-nowrap text-sm">{entry.entryTitle}</span>
@@ -812,10 +806,7 @@ const SiteMapDashboard = () => {
                         >
                           <div className="flex items-center justify-center w-5 shrink-0 h-5" />
                           <div className="flex items-center justify-center mr-2 shrink-0 w-5 h-5">
-                            <FontAwesomeIcon
-                              icon={faFile}
-                              className="text-gray-400 block text-xl"
-                            />
+                            <File fill="currentColor" className="text-gray-400 block w-5 h-5" />
                           </div>
                           <div className="flex items-center flex-1 min-w-0">
                             <span className="font-medium whitespace-nowrap text-sm">{entry.entryTitle}</span>
@@ -921,10 +912,9 @@ const SiteMapDashboard = () => {
                     <span>
                       {environments.find((e) => e.uid === selectedEnvironment)?.name || "Select Environment"}
                     </span>
-                    <FontAwesomeIcon 
-                      icon={showEnvDropdown ? faChevronUp : faChevronDown} 
-                      className="text-xs text-gray-600"
-                    />
+                    {showEnvDropdown
+                      ? <ChevronUp className="w-3 h-3 text-gray-600" />
+                      : <ChevronDown className="w-3 h-3 text-gray-600" />}
                   </button>
 
                   {showEnvDropdown && (
@@ -967,10 +957,9 @@ const SiteMapDashboard = () => {
                     <span>
                       {locales.find((l) => (l.code || l) === selectedLocale)?.code || selectedLocale || "Select Locale"}
                     </span>
-                    <FontAwesomeIcon 
-                      icon={showLocaleDropdown ? faChevronUp : faChevronDown} 
-                      className="text-xs text-gray-600"
-                    />
+                    {showLocaleDropdown
+                      ? <ChevronUp className="w-3 h-3 text-gray-600" />
+                      : <ChevronDown className="w-3 h-3 text-gray-600" />}
                   </button>
 
                   {showLocaleDropdown && (
@@ -1089,14 +1078,14 @@ const SiteMapDashboard = () => {
                             onClick={() => openEntryEditor(selectedEntry)}
                             className="w-full px-4 py-2 bg-blue-500 text-white border-0 rounded-md cursor-pointer text-sm font-medium flex items-center justify-center gap-2 hover:bg-blue-600 transition"
                           >
-                            <FontAwesomeIcon icon={faEdit} />
+                            <SquarePen className="w-4 h-4" />
                             Edit Entry
                           </button>
                           <button
                             onClick={() => openVisualBuilder(selectedEntry)}
                             className="w-full px-4 py-2 bg-green-500 text-white border-0 rounded-md cursor-pointer text-sm font-medium flex items-center justify-center gap-2 hover:bg-green-600 transition"
                           >
-                            <FontAwesomeIcon icon={faExternalLink} />
+                            <ExternalLink className="w-4 h-4" />
                             Open in Visual Editor
                           </button>
                         </div>
